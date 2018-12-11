@@ -9,7 +9,6 @@ public class RotateLayer : MonoBehaviour
     public PlanetSelector selector;
 
     private float rotationX;
-    private float rotationY;
     private float rotationSpeed = 10;
 
     Vector3 axis;
@@ -17,7 +16,6 @@ public class RotateLayer : MonoBehaviour
     private void Start()
     {
         rotationX = transform.rotation.eulerAngles.y;
-        rotationY = transform.rotation.eulerAngles.x;
         axis = layers[selection].transform.up;
     }
 
