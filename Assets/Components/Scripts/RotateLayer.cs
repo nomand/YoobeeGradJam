@@ -38,14 +38,12 @@ public class RotateLayer : MonoBehaviour
             if(selection != lastSelection)
             {
                 rotationX = 0;
-                rotationY = 0;
             }
         }
 
         if (Input.GetMouseButton(0))
         {
             rotationX = Input.GetAxis("Mouse X") * rotationSpeed;
-            rotationY = Input.GetAxis("Mouse Y") * rotationSpeed;
             RotateView();
         }
 
@@ -57,8 +55,6 @@ public class RotateLayer : MonoBehaviour
 
     public void RotateView()
     {
-        var angle = layers[selection].rotation.eulerAngles.y + rotationX;
-
         layers[selection].Rotate(axis, rotationX, Space.World); // = Quaternion.AngleAxis(angle, axis); //(Quaternion.AngleAxis(rotationX, Vector3.up) * Quaternion.AngleAxis(rotationY, Vector3.right));
     }
 }

@@ -1,10 +1,9 @@
-﻿// by @torahhorse
-
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
 public class LockMouse : MonoBehaviour
-{	
+{
+    bool lockstate = true;
+
 	void Start()
 	{
 		LockCursor(true);
@@ -21,12 +20,13 @@ public class LockMouse : MonoBehaviour
     	// unlock when escape is hit
         if  ( Input.GetKeyDown(KeyCode.Escape) )
         {
-        	LockCursor(!Screen.lockCursor);
+        	LockCursor(lockstate);
         }
     }
     
-    public void LockCursor(bool lockCursor)
+    public void LockCursor(bool state)
     {
-    	Screen.lockCursor = lockCursor;
+    	Cursor.lockState = state ? CursorLockMode.Locked : CursorLockMode.None;
+        lockstate = !state;
     }
 }
