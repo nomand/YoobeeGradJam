@@ -17,46 +17,53 @@ public class SolarSystemManager : MonoBehaviour
     public GameObject OrbitPrefab;
     public float OrbitSpacing = 0.2f;
 
+    [HideInInspector]
+    public GameObject[] OrbitInstances { get; private set; }
+
     private LayerRotationController LayerRotationController;
+    private StarManager starManager;
 
     void Start()
     {
+        starManager = FindObjectOfType<StarManager>();
         UIPlanetSelector = FindObjectOfType<PlanetSelector>();
         LayerRotationController = FindObjectOfType<LayerRotationController>();
+
         LayerRotationController.layers = new Transform[Planets.Length];
+        UIPlanetPositions =              new Vector3[Planets.Length];
+        UIPlanetSelector.planets =       new GameObject[Planets.Length];
+        OrbitInstances =                 new GameObject[Planets.Length];
+
         PopulateUI();
+        starManager.AssignStarsToLayers();
     }
 
     private void CreateOrbit(int i, GameObject planet)
     {
         float offset = 1f + (i * OrbitSpacing);
 
-        var orbit = Instantiate(OrbitPrefab, Vector3.zero, Quaternion.identity, OrbitContainer.transform);
+        GameObject orbit = Instantiate(OrbitPrefab, Vector3.zero, Quaternion.identity, OrbitContainer.transform);
         orbit.gameObject.name = "Layer " + i;
         orbit.transform.localScale = new Vector3(offset, offset, offset);
+        OrbitInstances[i] = orbit;
 
-        var body = Instantiate(planet, new Vector3(0, 0, 10 + offset), Quaternion.identity);
-        body.transform.position = orbit.GetComponent<Orbit>().planetPlacement.transform.position;
+        GameObject body = Instantiate(planet, orbit.GetComponent<Orbit>().planetPlacement.transform.position, Quaternion.identity);
         body.transform.parent = orbit.transform;
 
         RandomizeOrbitOrientation(orbit);
-
         LayerRotationController.layers[i] = orbit.transform;
     }
 
     private void RandomizeOrbitOrientation(GameObject orbit)
     {
-        float x = UnityEngine.Random.Range(0, 40);
+        float x = UnityEngine.Random.Range(0, 10);
         float y = UnityEngine.Random.Range(0, 360);
         float z = UnityEngine.Random.Range(0, 40);
-        orbit.transform.rotation = Quaternion.Euler(new Vector3(0, y, z));
+        orbit.transform.rotation = Quaternion.Euler(new Vector3(x, y, z));
     }
 
     private void PopulateUI()
     {
-        UIPlanetPositions = new Vector3[Planets.Length];
-        UIPlanetSelector.planets = new GameObject[Planets.Length];
-
         float width = 0;
 
         for (int i = 0; i < Planets.Length; i++)
