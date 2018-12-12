@@ -13,7 +13,7 @@ public class GUI3DScaler : MonoBehaviour
     {
         resolution = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
         camera = GetComponent<Camera>();
-        iconsPlacement = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.1f, 1f));
+        iconsPlacement = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.1f, 3f));
         ui.transform.position = iconsPlacement;
     }
 
@@ -21,7 +21,7 @@ public class GUI3DScaler : MonoBehaviour
     {
         if(Screen.currentResolution.width != resolution.x || Screen.currentResolution.height != resolution.y)
         {
-            iconsPlacement = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.1f, 1f));
+            iconsPlacement = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.1f, 3f));
             resolution = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
         }
     }
