@@ -11,13 +11,9 @@ public class PlanetSelector : MonoBehaviour
     public GameObject selectorGUI;
     public GameObject[] planets;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
+
         var step = Input.GetAxis("Mouse ScrollWheel");
 
         if (step > 0)
@@ -29,6 +25,13 @@ public class PlanetSelector : MonoBehaviour
             currentSelection = 0;
         else if (currentSelection < 0)
             currentSelection = planets.Length -1;
+
+        currentSelection = Input.GetKeyDown(KeyCode.Alpha1) ? 0 :
+                           Input.GetKeyDown(KeyCode.Alpha2) ? 1 :
+                           Input.GetKeyDown(KeyCode.Alpha3) ? 2 :
+                           Input.GetKeyDown(KeyCode.Alpha4) ? 3 :
+                           Input.GetKeyDown(KeyCode.Alpha5) ? 4 :
+                           currentSelection; 
 
         SelectPlanet(currentSelection);
     }
