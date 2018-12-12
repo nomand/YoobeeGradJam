@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 
-public class RotateLayer : MonoBehaviour
+public class LayerRotationController : MonoBehaviour
 {
     public Transform[] layers;
+    public float RotationSensitivity = 10;
+
     int selection;
     int lastSelection;
 
     public PlanetSelector selector;
 
     private float rotationX;
-    private float rotationSpeed = 10;
 
     Vector3 axis;
 
@@ -41,7 +42,7 @@ public class RotateLayer : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            rotationX = Input.GetAxis("Mouse X") * rotationSpeed;
+            rotationX = Input.GetAxis("Mouse X") * RotationSensitivity;
             RotateView();
         }
 
