@@ -6,6 +6,9 @@ public class PuzzleStar : MonoBehaviour
 {
     public bool InPosition { get; private set; }
 
+    [HideInInspector]
+    public float CloseEnoughPositionDistance = 1f;
+
     private Vector3 InitialPosition;
     private Material material;
 
@@ -22,9 +25,7 @@ public class PuzzleStar : MonoBehaviour
 
     private void CheckStarPositions()
     {
-        var currentStarPosition = transform.TransformPoint(Vector3.zero);
-
-        if (Vector3.SqrMagnitude(transform.TransformPoint(Vector3.zero) - InitialPosition) / 2 < 1f)
+        if (Vector3.SqrMagnitude(transform.TransformPoint(Vector3.zero) - InitialPosition) / 2 < CloseEnoughPositionDistance)
         {
             material.SetColor("_EmissionColor", Color.green * 2);
             InPosition = true;
