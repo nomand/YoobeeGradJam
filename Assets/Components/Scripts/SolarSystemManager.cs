@@ -25,6 +25,14 @@ public class SolarSystemManager : MonoBehaviour
 
     void Start()
     {
+        Initialize();
+        PopulateUI();
+        starManager.AssignStarsToLayers();
+        //starManager.ScrambleOrbits();
+    }
+
+    private void Initialize()
+    {
         starManager = FindObjectOfType<StarManager>();
         UIPlanetSelector = FindObjectOfType<PlanetSelector>();
         LayerRotationController = FindObjectOfType<LayerRotationController>();
@@ -33,9 +41,6 @@ public class SolarSystemManager : MonoBehaviour
         UIPlanetPositions =              new Vector3[Planets.Length];
         UIPlanetSelector.planets =       new GameObject[Planets.Length];
         OrbitInstances =                 new GameObject[Planets.Length];
-
-        PopulateUI();
-        starManager.AssignStarsToLayers();
     }
 
     private void CreateOrbit(int i, GameObject planet)
@@ -56,9 +61,9 @@ public class SolarSystemManager : MonoBehaviour
 
     private void RandomizeOrbitOrientation(GameObject orbit)
     {
-        float x = UnityEngine.Random.Range(0, 10);
+        float x = UnityEngine.Random.Range(0, 20);
         float y = UnityEngine.Random.Range(0, 360);
-        float z = UnityEngine.Random.Range(0, 40);
+        float z = UnityEngine.Random.Range(0, 20);
         orbit.transform.rotation = Quaternion.Euler(new Vector3(x, y, z));
     }
 
