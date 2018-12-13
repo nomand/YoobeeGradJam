@@ -6,6 +6,7 @@ public class Star
 {
     public GameObject FeatureStar;
     public int layer;
+    public bool inPosition;
 }
 
 public class StarManager : MonoBehaviour
@@ -15,6 +16,11 @@ public class StarManager : MonoBehaviour
 
     public Star[] PuzzleStars;
     private Vector3[] PuzzleStarInitialPositions;
+
+    private void Update()
+    {
+        CheckStarPositions();
+    }
 
     public void AssignStarsToLayers()
     {
@@ -27,11 +33,22 @@ public class StarManager : MonoBehaviour
         }
     }
 
-    public void ScrambleOrbits()
+    private void CheckStarPositions()
     {
-        foreach(GameObject orbit in solarSystemManager.OrbitInstances)
+        for (int i = 0; i < PuzzleStars.Length; i++)
         {
-            orbit.transform.Rotate(orbit.transform.up, UnityEngine.Random.Range(0, 360));
+            var currentStarPosition = PuzzleStars[i].FeatureStar.transform.TransformPoint(PuzzleStars[i].FeatureStar.transform.position);
+
+            if (Vector3.Distance(currentStarPosition, PuzzleStarInitialPositions[i]) < 2f)
+            {
+                PuzzleStars[i].FeatureStar.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green * 2);
+                PuzzleStars[i].inPosition = true;
+            }
+            else
+            {
+                PuzzleStars[i].FeatureStar.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(2.1f, 1.5f, 0));
+                PuzzleStars[i].inPosition = false;
+            }
         }
     }
 }

@@ -434,6 +434,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 20287448498553670, guid: 25e3ab2d6992a48f3ab7455baed062e0,
+        type: 2}
+      propertyPath: m_OcclusionCulling
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25e3ab2d6992a48f3ab7455baed062e0, type: 2}
   m_IsPrefabParent: 0
@@ -5342,12 +5347,16 @@ MonoBehaviour:
   PuzzleStars:
   - FeatureStar: {fileID: 317294865}
     layer: 0
+    inPosition: 0
   - FeatureStar: {fileID: 860604023}
     layer: 1
+    inPosition: 0
   - FeatureStar: {fileID: 1348519232}
     layer: 2
+    inPosition: 0
   - FeatureStar: {fileID: 952623843}
     layer: 0
+    inPosition: 0
 --- !u!4 &1109152590
 Transform:
   m_ObjectHideFlags: 0

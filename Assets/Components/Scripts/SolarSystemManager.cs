@@ -20,7 +20,7 @@ public class SolarSystemManager : MonoBehaviour
     [HideInInspector]
     public GameObject[] OrbitInstances { get; private set; }
 
-    private LayerRotationController LayerRotationController;
+    private LayerRotationController layerRotationController;
     private StarManager starManager;
 
     void Start()
@@ -28,17 +28,17 @@ public class SolarSystemManager : MonoBehaviour
         Initialize();
         PopulateUI();
         starManager.AssignStarsToLayers();
-        //starManager.ScrambleOrbits();
+        ScrambleOrbits();
     }
 
     private void Initialize()
     {
-        starManager = FindObjectOfType<StarManager>();
-        UIPlanetSelector = FindObjectOfType<PlanetSelector>();
-        LayerRotationController = FindObjectOfType<LayerRotationController>();
+        starManager =             FindObjectOfType<StarManager>();
+        UIPlanetSelector =        FindObjectOfType<PlanetSelector>();
+        layerRotationController = FindObjectOfType<LayerRotationController>();
 
-        LayerRotationController.layers = new Transform[Planets.Length];
-        UIPlanetPositions =              new Vector3[Planets.Length];
+        layerRotationController.layers = new Transform [Planets.Length];
+        UIPlanetPositions =              new Vector3   [Planets.Length];
         UIPlanetSelector.planets =       new GameObject[Planets.Length];
         OrbitInstances =                 new GameObject[Planets.Length];
     }
@@ -56,7 +56,7 @@ public class SolarSystemManager : MonoBehaviour
         body.transform.parent = orbit.transform;
 
         RandomizeOrbitOrientation(orbit);
-        LayerRotationController.layers[i] = orbit.transform;
+        layerRotationController.layers[i] = orbit.transform;
     }
 
     private void RandomizeOrbitOrientation(GameObject orbit)
@@ -90,5 +90,13 @@ public class SolarSystemManager : MonoBehaviour
 
         var selector = Instantiate(UISelector, UIPlanetPositions[0], Quaternion.identity, UIContainer.transform);
         UIPlanetSelector.selectorGUI = selector;
+    }
+
+    public void ScrambleOrbits()
+    {
+        foreach (GameObject orbit in OrbitInstances)
+        {
+            orbit.transform.Rotate(orbit.transform.up, UnityEngine.Random.Range(0, 360), Space.World);
+        }
     }
 }
