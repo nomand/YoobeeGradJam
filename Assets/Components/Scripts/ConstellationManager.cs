@@ -5,9 +5,9 @@ using UnityEngine;
 public class StarGroups : IEnumerator, IEnumerable
 {
     public GameObject[] Stars;
+    public GameObject line;
 
     private int position = -1;
-    public GameObject line;
 
     public IEnumerator GetEnumerator(){ return (IEnumerator)this; }
     public bool MoveNext() { position++; return (position < Stars.Length); }
