@@ -5,7 +5,9 @@ using UnityEngine;
 public class StarGroups : IEnumerator, IEnumerable
 {
     public GameObject[] Stars;
-    int position = -1;
+
+    private int position = -1;
+    public GameObject line;
 
     public IEnumerator GetEnumerator(){ return (IEnumerator)this; }
     public bool MoveNext() { position++; return (position < Stars.Length); }
@@ -15,15 +17,17 @@ public class StarGroups : IEnumerator, IEnumerable
 
 public class ConstellationManager : MonoBehaviour
 {
-    public GameObject linePrefab;
-    public StarGroups[] Group;
+    public GameObject LinePrefab;
+    public StarGroups[] StarGroups;
 
     private void Start()
     {
-        foreach(StarGroups group in Group)
+        foreach(StarGroups group in StarGroups)
         {
-            var thisLine = Instantiate(linePrefab).GetComponent<UpdateConstellationLine>();
+            var thisLine = Instantiate(LinePrefab).GetComponent<UpdateConstellationLine>();
             thisLine.gameObject.transform.parent = transform;
+            group.line = thisLine.gameObject;
+
             thisLine.stars = new GameObject[group.Stars.Length];
 
             for (int i = 0; i < group.Stars.Length; i++)

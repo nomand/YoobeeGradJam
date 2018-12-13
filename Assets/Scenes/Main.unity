@@ -122,11 +122,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: d2e0e1af59725194b9d4866161f38a3c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.76304996
+      value: -0.86
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d2e0e1af59725194b9d4866161f38a3c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.8195777
+      value: 2.72
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d2e0e1af59725194b9d4866161f38a3c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5105,17 +5105,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a712b37a1e55fb46aa42d7ada7474af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linePrefab: {fileID: 1359793504634418, guid: 45f4014f017fc8b438a311b2ebfa470b, type: 2}
-  Group:
-  - Stars:
-    - {fileID: 317294865}
-    - {fileID: 1348519232}
+  LinePrefab: {fileID: 1359793504634418, guid: 45f4014f017fc8b438a311b2ebfa470b, type: 2}
+  StarGroups:
   - Stars:
     - {fileID: 317294865}
     - {fileID: 860604023}
+    line: {fileID: 0}
+  - Stars:
+    - {fileID: 317294865}
+    - {fileID: 1348519232}
+    line: {fileID: 0}
   - Stars:
     - {fileID: 317294865}
     - {fileID: 952623843}
+    line: {fileID: 0}
 --- !u!1001 &860604021
 Prefab:
   m_ObjectHideFlags: 0
@@ -5355,7 +5358,7 @@ MonoBehaviour:
     layer: 2
     inPosition: 0
   - FeatureStar: {fileID: 952623843}
-    layer: 0
+    layer: 3
     inPosition: 0
 --- !u!4 &1109152590
 Transform:

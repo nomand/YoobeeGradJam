@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class UpdateConstellationLine : MonoBehaviour
 {
-    LineRenderer line;
-
+    private LineRenderer line;
     public GameObject[] stars;
 
-    void Start()
+    private void Start()
     {
         line = GetComponent<LineRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
         if (stars.Length == 0)
             return;
